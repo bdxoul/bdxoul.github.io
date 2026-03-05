@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bdxoul · links</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:     #0a0a0f;
+      --panel:  #10101a;
+      --border: #2a2a3a;
+      --c1: #00ffe7;
+      --c2: #ff00c8;
+      --c3: #ffe600;
+      --text: #d0d0e0;
+      --dim:  #6a6a8a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 999; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(0,0,0,0.13) 3px, rgba(0,0,0,0.13) 4px);
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 998; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,255,231,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,231,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridDrift 20s linear infinite;
+    }
+    @keyframes gridDrift { to { background-position: 40px 40px; } }
+
+    .orb { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.15; pointer-events: none; z-index: 0; }
+    .orb1 { width: 420px; height: 420px; background: var(--c1); top: -120px; left: -120px; animation: orbF 12s ease-in-out infinite; }
+    .orb2 { width: 360px; height: 360px; background: var(--c2); bottom: -80px; right: -80px; animation: orbF 15s ease-in-out infinite reverse; }
+    .orb3 { width: 260px; height: 260px; background: var(--c3); top: 45%; left: 55%; animation: orbF 10s ease-in-out infinite 3s; }
+    @keyframes orbF { 0%,100% { transform: translate(0,0); } 50% { transform: translate(30px,-30px); } }
+
+    .wrapper {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 50px 20px 80px;
+    }
+
+    .card {
+      width: 100%; max-width: 440px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 30px 26px 36px;
+      position: relative;
+      box-shadow: 0 0 0 1px #00ffe710, 0 10px 60px rgba(0,0,0,0.75);
+      animation: fadeUp 0.7s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card::before, .card::after {
+      content: ''; position: absolute;
+      width: 14px; height: 14px;
+      border-color: var(--c1); border-style: solid;
+    }
+    .card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    .win-bar {
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 24px;
+      font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--dim);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; box-shadow: 0 0 5px #ff5f57; }
+    .dot.y { background: #febc2e; box-shadow: 0 0 5px #febc2e; }
+    .dot.g { background: #28c840; box-shadow: 0 0 5px #28c840; }
+    .win-bar .title { margin-left: auto; }
+
+    .avatar-wrap { display: flex; justify-content: center; margin-bottom: 14px; animation: fadeUp 0.7s 0.1s both; }
+    .avatar-ring {
+      width: 90px; height: 90px; border-radius: 50%; padding: 3px;
+      background: conic-gradient(var(--c1), var(--c2), var(--c3), var(--c1));
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--bg); border: 3px solid var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px;
+    }
+
+    .name {
+      font-family: 'VT323', monospace; font-size: 38px;
+      text-align: center; color: var(--c1);
+      text-shadow: 0 0 8px #00ffe7aa, 0 0 24px #00ffe740;
+      line-height: 1; animation: fadeUp 0.7s 0.15s both;
+    }
+    .cursor {
+      display: inline-block; width: 9px; height: 14px;
+      background: var(--c1); box-shadow: 0 0 8px var(--c1);
+      vertical-align: middle; margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .handle {
+      text-align: center; font-size: 11px; letter-spacing: 0.18em;
+      color: var(--c2); text-shadow: 0 0 8px #ff00c8aa;
+      margin-top: 5px; animation: fadeUp 0.7s 0.2s both;
+    }
+    .bio {
+      text-align: center; font-size: 13px; color: var(--dim);
+      margin: 13px 0 24px; line-height: 1.65;
+      animation: fadeUp 0.7s 0.25s both;
+    }
+    .bio em { color: var(--c3); font-style: normal; text-shadow: 0 0 6px #ffe600aa; }
+
+    .divider {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 18px; animation: fadeUp 0.7s 0.3s both;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+    .divider span { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--dim); letter-spacing: 0.2em; }
+
+    .links { display: flex; flex-direction: column; gap: 9px; }
+
+    .link-btn {
+      display: flex; align-items: center; gap: 13px;
+      padding: 11px 15px;
+      border: 1px solid var(--border); border-radius: 2px;
+      background: rgba(255,255,255,0.02);
+      color: var(--text); text-decoration: none;
+      font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 0.04em;
+      position: relative; overflow: hidden;
+      transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      animation: fadeUp 0.7s both;
+    }
+    .link-btn:nth-child(1){animation-delay:0.33s}
+    .link-btn:nth-child(2){animation-delay:0.40s}
+    .link-btn:nth-child(3){animation-delay:0.47s}
+    .link-btn:nth-child(4){animation-delay:0.54s}
+    .link-btn:nth-child(5){animation-delay:0.61s}
+    .link-btn:nth-child(6){animation-delay:0.68s}
+    .link-btn:nth-child(7){animation-delay:0.75s}
+    .link-btn:nth-child(8){animation-delay:0.82s}
+    .link-btn:nth-child(9){animation-delay:0.89s}
+
+    .link-btn::before {
+      content: ''; position: absolute;
+      top: 0; left: -100%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      transition: left 0.45s ease;
+    }
+    .link-btn:hover::before { left: 160%; }
+
+    .link-btn::after {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--bc, var(--c1));
+      box-shadow: 0 0 10px var(--bc, var(--c1));
+      transform: scaleY(0); transform-origin: center;
+      transition: transform 0.2s;
+    }
+    .link-btn:hover::after { transform: scaleY(1); }
+
+    .link-btn:hover {
+      border-color: var(--bc, var(--c1));
+      color: #fff;
+      box-shadow: 0 0 14px color-mix(in srgb, var(--bc, var(--c1)) 25%, transparent);
+      transform: translateX(5px);
+    }
+
+    .link-btn .icon {
+      width: 20px; height: 20px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .link-btn .icon svg {
+      width: 18px; height: 18px;
+      fill: var(--bc, var(--c1));
+      transition: filter 0.2s;
+    }
+    .link-btn:hover .icon svg { filter: drop-shadow(0 0 5px var(--bc, var(--c1))); }
+
+    .link-btn .label { flex: 1; }
+    .link-btn .arrow {
+      font-size: 18px; color: var(--dim);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .link-btn:hover .arrow { color: var(--bc, var(--c1)); transform: translateX(3px); }
+
+    .bc-cyan   { --bc: #00ffe7; }
+    .bc-pink   { --bc: #ff00c8; }
+    .bc-green  { --bc: #00ff88; }
+    .bc-red    { --bc: #ff4455; }
+    .bc-blue   { --bc: #00bfff; }
+    .bc-orange { --bc: #ff8c00; }
+    .bc-lime   { --bc: #aaff00; }
+    .bc-yellow { --bc: #ffe600; }
+    .bc-purple { --bc: #bf5fff; }
+
+    .footer {
+      margin-top: 26px;
+      font-family: 'Press Start 2P', monospace; font-size: 6px;
+      color: var(--dim); letter-spacing: 0.15em; text-align: center;
+      animation: fadeUp 0.7s 1s both;
+    }
+    .footer span { color: var(--c2); text-shadow: 0 0 8px #ff00c8aa; }
+
+    .ticker-wrap {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 26px; background: rgba(10,10,15,0.96);
+      border-top: 1px solid var(--border);
+      overflow: hidden; z-index: 10;
+      display: flex; align-items: center;
+    }
+    .ticker {
+      display: flex; gap: 60px; white-space: nowrap;
+      animation: tick 30s linear infinite;
+      font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--dim);
+    }
+    .ticker b { color: var(--c1); }
+    @keyframes tick { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+  </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="wrapper">
+  <div class="card">
+
+    <div class="win-bar">
+      <span class="dot r"></span>
+      <span class="dot y"></span>
+      <span class="dot g"></span>
+      <span class="title">PROFILE.EXE</span>
+    </div>
+
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <div class="avatar-inner">🎧</div>
+      </div>
+    </div>
+
+    <div class="name">bdxoul<span class="cursor"></span></div>
+    <div class="handle">@bdxoul</div>
+    <p class="bio">
+      digital wanderer · <em>tech</em> &amp; <em>art</em> · building cool things<br/>
+      living in the future 🌐
+    </p>
+
+    <div class="divider"><span>// LINKS //</span></div>
+
+    <div class="links">
+
+      <!-- Twitter / X -->
+      <a href="https://twitter.com/iambdxoul" target="_blank" rel="noopener" class="link-btn bc-cyan">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+        <span class="label">Twitter / X</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/bdxoul" target="_blank" rel="noopener" class="link-btn bc-pink">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span>
+        <span class="label">Instagram</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- Medium -->
+      <a href="https://medium.com/@iambdxoul" target="_blank" rel="noopener" class="link-btn bc-green">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></span>
+        <span class="label">Medium</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@bdxoul" target="_blank" rel="noopener" class="link-btn bc-red">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+        <span class="label">YouTube</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://telegram.me/bdxoul" target="_blank" rel="noopener" class="link-btn bc-blue">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>
+        <span class="label">Telegram</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- XDA -->
+      <a href="https://forum.xda-developers.com/m/bdxoul.6738139/" target="_blank" rel="noopener" class="link-btn bc-orange">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.726 4.571L0 12l6.726 7.429h3.98L4.026 12l6.68-7.429zm6.568 0L20 12l-6.706 7.429h3.98L24 12l-6.726-7.429zM9.77 10.403l-1.638 1.601 1.638 1.6h4.46l-1.637-1.6 1.637-1.601z"/></svg></span>
+        <span class="label">XDA Developers</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- DeviantArt -->
+      <a href="https://bdxoul.deviantart.com/" target="_blank" rel="noopener" class="link-btn bc-lime">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.207 4.794l.23-.43V0h-4.769l-.436.46-2.512 4.963-.697.577H4.793v6.282h3.244l.4.4-3.644 7.119-.23.43V24h4.77l.435-.46 2.512-4.963.697-.577h6.43v-6.282h-3.243l-.4-.4z"/></svg></span>
+        <span class="label">DeviantArt</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- Blogger / Tech Blog -->
+      <a href="https://bdxoulsweb.blogspot.com/?m=1" target="_blank" rel="noopener" class="link-btn bc-yellow">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.976 24H2.026C.9 24 0 23.1 0 21.976V2.026C0 .9.9 0 2.026 0h19.95C23.1 0 24 .9 24 2.026v19.95C24 23.1 23.1 24 21.976 24zM11.5 5.5h-3C7.12 5.5 6 6.62 6 7.997v8.006C6 17.38 7.12 18.5 8.5 18.5H15.5C16.88 18.5 18 17.38 18 16.003v-4.756c0-.69-.56-1.247-1.25-1.247H15.5c-.69 0-1.25-.56-1.25-1.25v-.75C14.25 6.62 13.13 5.5 11.75 5.5H11.5zm-.75 4h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 010-1.5zm4.5 4a.75.75 0 010 1.5h-7.5a.75.75 0 010-1.5h7.5z"/></svg></span>
+        <span class="label">Bdxoul's Tech Blog</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- WordPress / Personal Blog -->
+      <a href="https://bdxoul.wordpress.com/" target="_blank" rel="noopener" class="link-btn bc-purple">
+        <span class="icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.341l3.295-9.525c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.127m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.031-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.843 3.479l-1.104 3.703-4.01-11.918zm-3.081 13.709l4.019-11.678.002-.005c.958 2.544 1.362 4.419 1.362 6.063 0 .696-.045 1.317-.12 1.915l-5.263 3.705zm-7.649-3.96c-.041-.326-.063-.658-.063-.995 0-1.271.239-2.484.674-3.6l3.893 10.679c-2.613-1.363-4.504-4.021-4.504-7.084M12 0C5.373 0 0 5.372 0 12 0 18.627 5.373 24 12 24c6.628 0 12-5.372 12-12 0-6.627-5.372-12-12-12"/></svg></span>
+        <span class="label">Personal Blog</span>
+        <span class="arrow">›</span>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="footer">MADE WITH <span>♥</span> · SYSTEM ONLINE · 2025</div>
+</div>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <b>★</b> WELCOME TO MY LINKS &nbsp;&nbsp;
+    <b>★</b> TWITTER · INSTAGRAM · MEDIUM · YOUTUBE · TELEGRAM · XDA · DEVIANTART &nbsp;&nbsp;
+    <b>★</b> STAY CONNECTED &nbsp;&nbsp;
+    <b>★</b> WELCOME TO MY LINKS &nbsp;&nbsp;
+    <b>★</b> TWITTER · INSTAGRAM · MEDIUM · YOUTUBE · TELEGRAM · XDA · DEVIANTART &nbsp;&nbsp;
+    <b>★</b> STAY CONNECTED &nbsp;&nbsp;
+  </div>
+</div>
+
+</body>
+</html>
